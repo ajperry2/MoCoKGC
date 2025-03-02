@@ -7,22 +7,20 @@ Be creative! do whatever you want!
 - Start a web application
 - Import things from your .base module
 """
+import typer
+from typing_extensions import Annotated
+from pathlib import Path
 
+from mocokgc.scripts.train import train as train_internal
 
-def main():  # pragma: no cover
-    """
-    The main function executes on commands:
-    `python -m mocokgc` and `$ mocokgc `.
+app = typer.Typer()
 
-    This is your program's entry point.
+@app.command("train")
+def train(config_path: Annotated[str, typer.Argument()] = Path(__file__).parents[0] / "config.yaml"):
+    print(config_path)
+    train_internal(config_path)
 
-    You can change this function to do whatever you want.
-    Examples:
-        * Run a test suite
-        * Run a server
-        * Do some other stuff
-        * Run a command line application (Click, Typer, ArgParse)
-        * List all available tasks
-        * Run an application (Flask, FastAPI, Django, etc.)
-    """
-    print("This will do something")
+@app.command("test")
+def test( config_path: Annotated[str, typer.Argument()] = None):
+    print(config_path)
+    train_internal(config_path)

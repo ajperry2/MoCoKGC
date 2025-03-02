@@ -1,0 +1,9 @@
+seed: 0
+dataset:
+  name: ""
+  path: ""
+
+neighborhood_parser:
+  hidden_dims: [64, 64]
+  dropout: 0.0
+  num_layers: 1
